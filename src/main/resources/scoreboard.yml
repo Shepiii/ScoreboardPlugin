@@ -1,0 +1,7 @@
+enabled: true
+title: "&cDas ist ein Test"
+name: "Test"
+scores:
+  0: "&4--------------------------------"
+  1: "&3Hier koennte ihre Werbung stehen!"
+  2: "&c--------------------------------"

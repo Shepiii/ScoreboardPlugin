@@ -1,43 +1,50 @@
 plugins {
-    id 'java'
+  id 'java'
 }
 
 group 'de.shepiii.scoreboardsystem'
 version '1.0.0-SNAPSHOT'
 
 repositories {
-    google()
-    mavenLocal()
-    mavenCentral()
-    maven {
-        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-    }
-    maven {
-        url = "https://oss.sonatype.org/content/repositories/snapshots"
-    }
+  google()
+  mavenCentral()
+  mavenLocal()
+  maven {
+    url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+  }
+  maven {
+    url = 'https://oss.sonatype.org/content/repositories/snapshots'
+  }
+  maven {
+    url = 'https://repo.dmulloy2.net/nexus/repository/public/'
+  }
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
-    testImplementation 'org.mockito:mockito-junit-jupiter:3.5.2'
-    implementation 'com.google.inject:guice:4.2.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.2'
-    implementation 'org.spigotmc:spigot-api:1.16.2-R0.1-SNAPSHOT'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+  testImplementation 'org.mockito:mockito-junit-jupiter:3.5.2'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  testImplementation 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
+  implementation 'com.google.inject:guice:4.2.3'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+  compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.2'
+  compileOnly 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
+  compileOnly 'com.comphenix.protocol:ProtocolLib:4.5.0'
+  compile fileTree(include: ['*.*'], dir: 'resources')
 }
 
 java {
-    withSourcesJar()
-    withJavadocJar()
+  withSourcesJar()
+  withJavadocJar()
 }
 
 test {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
 
 jar {
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  }
 }

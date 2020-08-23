@@ -1,0 +1,9 @@
+name: ScoreBoardSystem
+author: Shepiii
+description: An advanced plugin that handels your ScoreBoard
+main: de.shepiii.scoreboardsystem.ScoreBoardSystemPlugin
+version: 1.0.0
+depend:
+  - ProtocolLib
+
+commands:
