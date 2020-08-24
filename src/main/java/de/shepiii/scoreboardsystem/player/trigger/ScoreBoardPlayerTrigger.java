@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-@Singleton
 public final class ScoreBoardPlayerTrigger implements Listener {
   private final ScoreBoardPlayerRegistry scoreBoardPlayerRegistry;
 

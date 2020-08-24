@@ -20,8 +20,7 @@ public final class ScoreBoardPlayer {
   }
 
   public void sendScoreBoard(
-    String name, String title, Map<Integer, String> scores
-  ) {
+    String name, String title, Map<Integer, String> scores) {
     sendScoreboardObjective(name, title);
     sendScoreBoardDisplayObjective(name);
     scores.forEach((value, score) -> sendScoreBoardScore(value, name, score));

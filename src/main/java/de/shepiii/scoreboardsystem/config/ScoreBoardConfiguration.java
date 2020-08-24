@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-public class ScoreBoardConfiguration {
+public final class ScoreBoardConfiguration {
   private boolean enabled;
   private String title;
   private String name;

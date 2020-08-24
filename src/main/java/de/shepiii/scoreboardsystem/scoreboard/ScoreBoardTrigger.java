@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Map;
 
-@Singleton
 public final class ScoreBoardTrigger implements Listener {
   private final ScoreBoardPlayerRegistry scoreBoardPlayerRegistry;
   private final ScoreBoardConfiguration scoreBoardConfiguration;

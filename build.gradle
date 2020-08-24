@@ -6,9 +6,7 @@ group 'de.shepiii.scoreboardsystem'
 version '1.0.0-SNAPSHOT'
 
 repositories {
-  google()
   mavenCentral()
-  mavenLocal()
   maven {
     url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
   }
@@ -41,6 +39,10 @@ java {
 
 test {
   useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
 }
 
 jar {

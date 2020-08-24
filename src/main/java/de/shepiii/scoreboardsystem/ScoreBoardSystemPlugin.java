@@ -2,7 +2,9 @@ package de.shepiii.scoreboardsystem;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import de.shepiii.scoreboardsystem.config.ScoreBoardConfiguration;
+import de.shepiii.scoreboardsystem.inject.InjectionModule;
 import de.shepiii.scoreboardsystem.player.ScoreBoardPlayer;
 import de.shepiii.scoreboardsystem.player.ScoreBoardPlayerRegistry;
 import de.shepiii.scoreboardsystem.player.trigger.ScoreBoardPlayerTrigger;
@@ -16,12 +18,9 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 
 public final class ScoreBoardSystemPlugin extends JavaPlugin {
+  private Injector injector;
   @Inject
   private PluginManager pluginManager;
-  @Inject
-  private ScoreBoardTrigger scoreBoardTrigger;
-  @Inject
-  private ScoreBoardPlayerTrigger scoreBoardPlayerTrigger;
   @Inject
   private ScoreBoardConfiguration scoreBoardConfiguration;
   @Inject
@@ -30,7 +29,7 @@ public final class ScoreBoardSystemPlugin extends JavaPlugin {
   @Override
   public void onEnable() {
     saveResource("scoreboard.yml", false);
-    var injector = Guice.createInjector(ScoreBoardSystemModule.forPlugin(this));
+    injector = Guice.createInjector(InjectionModule.forPlugin(this));
     injector.injectMembers(this);
     if (!scoreBoardConfiguration.isEnabled()) {
       Bukkit.getConsoleSender().sendMessage("Plugin is disabled!");
@@ -42,8 +41,8 @@ public final class ScoreBoardSystemPlugin extends JavaPlugin {
   }
 
   private void registerTriggers() {
-    pluginManager.registerEvents(scoreBoardTrigger, this);
-    pluginManager.registerEvents(scoreBoardPlayerTrigger, this);
+    pluginManager.registerEvents(injector.getInstance(ScoreBoardTrigger.class), this);
+    pluginManager.registerEvents(injector.getInstance(ScoreBoardPlayerTrigger.class), this);
   }
 
   private void updateIfReload() {
