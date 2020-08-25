@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import de.shepiii.scoreboardsystem.config.ScoreBoardConfiguration;
 import de.shepiii.scoreboardsystem.inject.InjectionModule;
+import de.shepiii.scoreboardsystem.permission.PermissionTrigger;
 import de.shepiii.scoreboardsystem.player.ScoreBoardPlayer;
 import de.shepiii.scoreboardsystem.player.ScoreBoardPlayerRegistry;
 import de.shepiii.scoreboardsystem.player.trigger.ScoreBoardPlayerTrigger;
@@ -28,7 +29,7 @@ public final class ScoreBoardSystemPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    saveResource("scoreboard.yml", false);
+    saveResources();
     injector = Guice.createInjector(InjectionModule.forPlugin(this));
     injector.injectMembers(this);
     if (!scoreBoardConfiguration.isEnabled()) {
@@ -37,18 +38,23 @@ public final class ScoreBoardSystemPlugin extends JavaPlugin {
       return;
     }
     registerTriggers();
-    updateIfReload();
+    if (Bukkit.getOnlinePlayers().isEmpty()) {
+      updatePlayers();
+    }
+  }
+
+  private void saveResources() {
+    saveResource("scoreboard.yml", false);
+    saveResource("permissionConfiguration.yml", false);
   }
 
   private void registerTriggers() {
     pluginManager.registerEvents(injector.getInstance(ScoreBoardTrigger.class), this);
     pluginManager.registerEvents(injector.getInstance(ScoreBoardPlayerTrigger.class), this);
+    pluginManager.registerEvents(injector.getInstance(PermissionTrigger.class), this);
   }
 
-  private void updateIfReload() {
-    if (Bukkit.getOnlinePlayers().isEmpty()) {
-      return;
-    }
+  private void updatePlayers() {
     Executors.newSingleThreadExecutor().execute(() -> {
       for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
         var scoreBoardPlayer = ScoreBoardPlayer.forPlayer(onlinePlayer);

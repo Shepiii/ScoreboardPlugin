@@ -9,6 +9,8 @@
 ## Features
 - easy to enable / disable
 - works with reloading and updates all scoreboards
+- easy to use for programmers
+- display the ServerGroup of Player easily
 
 ## Requirements
 - Java 14
@@ -17,6 +19,13 @@
 
 ## How to use
 When putting the plugin on the server, a Config-Folder is created where all settings can be changed.
+
+Display of ServerGroups:
+You can display ServerGroups by using %rank% in the default config.
+Furthermore, you have to edit the "permissionConfiguration.yml", where you can set the individual groups with permissions.
+
+## For programmers
+You can use the AsyncScoreBoardScoreCreate-Event for Triggers, which can e.g. edit single components of the score itself.
 
 ## Further Comments
 Since PacketWrapper highly recommends not to use the Plugin itself, but only the needed classes, there is an extra Package named "PacketWrapper" where you can find the classes of [it](https://github.com/dmulloy2/PacketWrapper).
