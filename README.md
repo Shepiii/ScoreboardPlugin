@@ -1,10 +1,10 @@
-# ScoreBoardSystem
+# ScoreboardPlugin
  A simple plugin that allows you to use an advanced scoreboard without programming-experience at all
 
 ## Build Status
 |             | Build Status                                                                                                            |
 |-------------|-------------------------------------------------------------------------------------------------------------------------|
-| Master      | ![Java CI with Gradle](https://github.com/Shepiii/ScoreBoardSystem/workflows/Java%20CI%20with%20Gradle/badge.svg) |
+| Master      | ![Java CI with Gradle](https://github.com/Shepiii/ScoreboardPlugin/workflows/Java%20CI%20with%20Gradle/badge.svg) |
 
 ## Features
 - easy to enable / disable
